@@ -21,7 +21,7 @@ __asm__("movw $0x68, %1\n\t" \
 	"m" (*(num + 7)), "m" (type))
 
 #define my_set_tss_desc(n,addr) my_set_tssldt_desc(n,addr,"0x89")
-#define my_set_tss_desc(n,addr) my_set_tssldt_desc(n,addr,"0x82")
+#define my_set_ldt_desc(n,addr) my_set_tssldt_desc(n,addr,"0x82")
 
 #define tr_init(n) \
 __asm__("ltr %%ax" \
