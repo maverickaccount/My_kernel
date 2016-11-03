@@ -38,20 +38,3 @@ __asm__("movl $0x00, %%eax\n\t" \
 	"rorl $3, %%eax\n\t" \
 	"movw %%ax, %0\n\t" \
 :: "m" (n))
-
-#define my_set_base(addr,base) \
-__asm__("movw %%ax, %0\n\t" \
-	"rorl $16, %%eax\n\t" \
-	"movb %%al, %1\n\t" \
-	"rorl $8, %%eax\n\t" \
-	"movb %%al, %2" \
-:: "m" (*(addr + 2)), "m" (*(addr + 4)), "m" (*(addr + 7)), "a" (base))
-
-#define my_get_base(addr,base) \
-__asm__("movw %1, %%ax\n\t" \
-	"roll $8, %%eax\n\t" \
-	"movb %3, %%al\n\t" \
-	"roll $8, %%eax\n\t" \
-	"movb %2, %%al\n\t" \
-	"rorl $16, %%eax" \
-: "=a" (base) : "m" (*(addr + 2)), "m" (*(addr + 4)), "m" (*(addr + 7)), "a" (0))
