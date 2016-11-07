@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "./my_include/base_limit.h"
-#include "./my_lib/set_full_desc.h"
+#include "../my_include/base_limit.h"
+#include "../my_include/set_full_desc.h"
 
 void	set_full_desc(int address, int limit, char g, \
 	char b, char a2, char p, char dpl, char dpl2, char s, char e, char x, \
