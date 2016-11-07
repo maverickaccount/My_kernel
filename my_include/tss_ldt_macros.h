@@ -1,3 +1,6 @@
+#ifndef TSS_LDT_MACROS_H
+#define TSS_LDT_MACROS_H
+
 #define FIRST_TSS_ENTRY 4
 #define FIRST_LDT_ENTRY (FIRST_TSS_ENTRY + 1)
 #define tss_index(n) ((((unsigned int) n) * 2) + FIRST_TSS_ENTRY)
@@ -38,3 +41,5 @@ __asm__("movl $0x00, %%eax\n\t" \
 	"rorl $3, %%eax\n\t" \
 	"movw %%ax, %0\n\t" \
 :: "m" (n))
+
+#endif

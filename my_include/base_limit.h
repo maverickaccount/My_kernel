@@ -1,3 +1,6 @@
+#ifndef BASE_LIMIT_H
+#define BASE_LIMIT_H
+
 #define my_set_base(addr,base) \
 __asm__("movw %%ax, %0\n\t" \
 	"rorl $16, %%eax\n\t" \
@@ -31,3 +34,5 @@ __asm__("movb %2, %%al\n\t" \
 	"rorl $16, %%eax\n\t" \
 	"movw %1, %%ax\n\t" \
 : "=a" (limit) : "m" (*(addr)), "m" (*(addr + 6)), "a" (0))
+
+#endif
