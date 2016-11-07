@@ -9,4 +9,7 @@ __asm__("outb %%bl, %%ax\n\t" \
 __asm__("inb %%bx, %%al\n\t" \
 	: "=a" (byte): "b" (port))
 
+void	my_outb_pause(unsigned char byte, short port);
+void	my_inb_pause(unsigned char byte, short port);
+
 #endif
