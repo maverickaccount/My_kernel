@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "../my_include/base_limit.h"
 #include "../my_include/set_full_desc.h"
 
