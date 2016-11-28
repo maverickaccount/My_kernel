@@ -10,7 +10,7 @@ my_setup_idt:
 	movw %bx,%ax
 	movw 0x8E00,%bx # 1 00 0 1110 00000000 (present,dpl,type)
 	lea _my_idt,%edi
-	movl $512,%ecx
+	movl $256,%ecx
 my_rp_sidt:
 	movl %eax,(%edi)
 	movl %ebx,4(%edi)
