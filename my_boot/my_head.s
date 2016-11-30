@@ -1,6 +1,8 @@
 .text
 .globl _my_idt, _my_gdt, _my_pg_dir
 
+//_my_pg_dir defini l'adresse de base du repertoire de page
+
 _my_pg_dir:
 my_startup32:
 
