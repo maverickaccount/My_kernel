@@ -3,6 +3,8 @@
 
 #define NULL ((void *) 0)
 #define PAGE_SIZE 4096 //4Ko
+#define NR_TASKS 64
+ 
 //Cette partie concerne le champs state de my_task_struct
 #define TASK_RUNNING 0 //processus pret ou elu
 #define TASK_INTERRUPTIBLE 2 //processus suspendu en attendant une evenement
@@ -92,8 +94,6 @@ typedef union my_task_union
 	my_tss_struct tss;
 	char page[4096];
 }my_task_union;
-
-static my_task_union my_init_task = {MY_INIT_TASK,};
 
 typedef struct	my_task_struct
 {
