@@ -5,6 +5,11 @@
 
 #define SUPER_MAGIC 0x137f //valeur servant a indique un noeud d'information
 #define NR_INODE 94 //nombre max de descripteur de noeud d'info, defini statiquement dans mon code
+#define NR_SUPER 8 //2 disque de 4 partitions max
+#define NR_FILE 64 //nombre de descripteurs de fichier
+
+#define MAJOR(a) (((unsigned) (a)) >> 8) //pour les fichiers de peripheriques
+#define MINOR(a) ((a) & 0xff)
 
 typedef struct my_m_inode
 {
@@ -58,7 +63,7 @@ typedef struct my_struct_buffer_head
 	
 }my_struct_buffer_head;
 
-typedef struct my_super_bloc
+typedef struct my_super_block
 {
 	unsigned short n_idode; //nombre de noeuds d'info
 	unsigned short n_izone; //nombre de zones
@@ -67,8 +72,25 @@ typedef struct my_super_bloc
 	unsigned short first_data_zone; //premier bloc de données
 	unsigned short log_zone_size; //vaut 1 = (ln(2))/(ln(2))
 	unsigned long max_size; //taille maximum des fichiers
-	unsigned short magic; //
-}my_super_bloc;
+	unsigned short magic; //sert a indiquer qu'il s'agit d'un noeud d'info
+	my_struct_buffer_head *s_imap[8]; //indique les buffer_head qui pointent sur la table des noeuds d'info
+	my_struct_buffer_head *z_imap[8]; //indique les buffer_head qui pointent sur la table des zones
+	unsigned short dev; //numero du peripherique du super bloc
+	my_m_inode *isup; //indique le descripteur du noeud d'info du systeme de fichier monté
+	my_m_inode *imount; //indique le descripteur du noeud d'info sur lequel est monté eventuellement le fichier
+	unsigned long time; //date derniere mise a jour
+	unsigned char rd_only; //indique la lecture seule
+	unsigned char dirt; //indique qu'il faut ecrire sur le disque le contenu
+}my_super_block;
+
+typedef struct file
+{
+	unsigned short f_mode; //indique lecture, ecriture ou lecture-ecriture
+	unsigned short f_flags; //indique droit d'acces du fichier
+	unsigned short f_count; //incremente si fork(), puis decremente a la fin d'un processus
+	my_m_inode *f_inode; //adresse du desc de noeud d'info du fichier
+	long f_pos; //position de l'index dans le fichier, depend du processus considéré
+}file;
 
 void	my_buffer_init(void);
 
